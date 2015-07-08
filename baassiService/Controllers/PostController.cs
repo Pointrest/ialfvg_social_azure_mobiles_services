@@ -7,6 +7,8 @@ using Microsoft.WindowsAzure.Mobile.Service;
 using baassiService.DataObjects;
 using baassiService.Models;
 using Microsoft.WindowsAzure.Mobile.Service.Security;
+using System;
+using System.Collections.Generic;
 
 namespace baassiService.Controllers
 {
@@ -57,6 +59,22 @@ namespace baassiService.Controllers
             item.UserId = currentUser.Id;
 
             Post current = await InsertAsync(item);
+
+            Dictionary<string, string> data = new Dictionary<string, string>()
+            {
+                { "message", item.Text}
+            };
+            GooglePushMessage message = new GooglePushMessage(data, TimeSpan.FromHours(1));
+
+            try
+            {
+                var result = await Services.Push.SendAsync(message);
+                Services.Log.Info(result.State.ToString());
+            }
+            catch (System.Exception ex)
+            {
+                Services.Log.Error(ex.Message, null, "Push.SendAsync Error");
+            }
             return CreatedAtRoute("Tables", new { id = current.Id }, current);
         }
 
