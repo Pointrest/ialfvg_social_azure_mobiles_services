@@ -39,5 +39,9 @@ namespace baassiService.Models
                 new AttributeToColumnAnnotationConvention<TableColumnAttribute, string>(
                     "ServiceTableColumn", (property, attributes) => attributes.Single().ColumnType.ToString()));
         }
+
+        public System.Data.Entity.DbSet<baassiService.DataObjects.Post> Posts { get; set; }
+
+        public System.Data.Entity.DbSet<baassiService.DataObjects.User> Users { get; set; }
     }
 }
