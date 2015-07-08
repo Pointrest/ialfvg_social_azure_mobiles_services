@@ -68,7 +68,11 @@ namespace baassiService.Controllers
 
             try
             {
-                var result = await Services.Push.SendAsync(message);
+                //var result = await Services.Push.SendAsync(message);
+
+                // Use a tag to only send the notification to the logged-in user.
+                var result = await Services.Push.SendAsync(message, currentUser.Id);
+
                 Services.Log.Info(result.State.ToString());
             }
             catch (System.Exception ex)
