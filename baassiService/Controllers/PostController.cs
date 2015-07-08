@@ -54,12 +54,25 @@ namespace baassiService.Controllers
         {
             // Get the logged in user
             var currentUser = User as ServiceUser;
+            var userID = currentUser.Id;
 
-            // Set the user ID on the item
-            item.UserId = currentUser.Id;
+            var userController = new UserController();
+            var user = userController.GetUser(userID);
 
-            Post current = await InsertAsync(item);
+            Post current = null;
+            if (user != null)
+            {
+                item.UserId = currentUser.Id;
 
+                current = await InsertAsync(item);
+            }
+
+            await sendPushNotification(item, currentUser);
+            return CreatedAtRoute("Tables", new { id = current.Id }, current);
+        }
+
+        private async Task sendPushNotification(Post item, ServiceUser currentUser)
+        {
             Dictionary<string, string> data = new Dictionary<string, string>()
             {
                 { "message", item.Text}
@@ -79,7 +92,6 @@ namespace baassiService.Controllers
             {
                 Services.Log.Error(ex.Message, null, "Push.SendAsync Error");
             }
-            return CreatedAtRoute("Tables", new { id = current.Id }, current);
         }
 
         // DELETE tables/Post/48D68C86-6EA6-4C25-AA33-223FC9A27959
