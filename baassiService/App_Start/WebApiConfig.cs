@@ -20,7 +20,7 @@ namespace baassiService
 
             // Use this class to set WebAPI configuration options
             HttpConfiguration config = ServiceConfig.Initialize(new ConfigBuilder(options));
-            config.SetIsHosted(true); // jeust if we want to debug locally
+            //config.SetIsHosted(true); // jeust if we want to debug locally
 
             // To display errors in the browser during development, uncomment the following
             // line. Comment it out again when you deploy your service for production use.
@@ -34,7 +34,7 @@ namespace baassiService
     {
         protected override void Seed(baassiContext context)
         {
-            List<TodoItem> todoItems = new List<TodoItem>
+            /*List<TodoItem> todoItems = new List<TodoItem>
             {
                 new TodoItem { Id = Guid.NewGuid().ToString(), Text = "First item", Complete = false },
                 new TodoItem { Id = Guid.NewGuid().ToString(), Text = "Second item", Complete = false },
@@ -43,7 +43,7 @@ namespace baassiService
             foreach (TodoItem todoItem in todoItems)
             {
                 context.Set<TodoItem>().Add(todoItem);
-            }
+            }*/
 
             base.Seed(context);
         }

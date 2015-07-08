@@ -189,9 +189,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\PostController.cs" />
-    <Compile Include="Controllers\TodoItemController.cs" />
     <Compile Include="DataObjects\Post.cs" />
-    <Compile Include="DataObjects\TodoItem.cs" />
     <Compile Include="Models\baassiContext.cs" />
     <Compile Include="ScheduledJobs\SampleJob.cs" />
     <Compile Include="Global.asax.cs">

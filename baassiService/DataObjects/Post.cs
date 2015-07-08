@@ -9,6 +9,7 @@ namespace baassiService.DataObjects
 {
     public class Post : EntityData
     {
+        public string UserId { get; set; }
         public string Text { get; set; }
     }
 }

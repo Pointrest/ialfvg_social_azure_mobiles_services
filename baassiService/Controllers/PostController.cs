@@ -26,6 +26,15 @@ namespace baassiService.Controllers
             return Query(); 
         }
 
+        // GET tables/Post
+        public IQueryable<Post> GetAllUserPost()
+        {
+            // Get the logged in user
+            var currentUser = User as ServiceUser;
+
+            return Query().Where(post => post.UserId == currentUser.Id);
+        }
+
         // GET tables/Post/48D68C86-6EA6-4C25-AA33-223FC9A27959
         public SingleResult<Post> GetPost(string id)
         {
@@ -41,6 +50,12 @@ namespace baassiService.Controllers
         // POST tables/Post
         public async Task<IHttpActionResult> PostPost(Post item)
         {
+            // Get the logged in user
+            var currentUser = User as ServiceUser;
+
+            // Set the user ID on the item
+            item.UserId = currentUser.Id;
+
             Post current = await InsertAsync(item);
             return CreatedAtRoute("Tables", new { id = current.Id }, current);
         }
