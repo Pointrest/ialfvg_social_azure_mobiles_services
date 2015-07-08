@@ -200,6 +200,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\PushRegistrationHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
