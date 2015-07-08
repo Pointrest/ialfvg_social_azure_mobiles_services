@@ -36,6 +36,16 @@ namespace baassiService.Models
             modelBuilder.Conventions.Add(
                 new AttributeToColumnAnnotationConvention<TableColumnAttribute, string>(
                     "ServiceTableColumn", (property, attributes) => attributes.Single().ColumnType.ToString()));
+
+            modelBuilder.Entity<User>()
+                   .HasMany<User>(u => u.Followers)
+                   .WithMany(c => c.Following)
+                   .Map(cs =>
+                   {
+                       cs.MapLeftKey("Followers");
+                       cs.MapRightKey("Following");
+                       cs.ToTable("UserRelations");
+                   });
         }
 
         public System.Data.Entity.DbSet<baassiService.DataObjects.Post> Posts { get; set; }
