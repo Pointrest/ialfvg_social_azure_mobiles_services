@@ -6,9 +6,11 @@ using System.Web.Http.OData;
 using Microsoft.WindowsAzure.Mobile.Service;
 using baassiService.DataObjects;
 using baassiService.Models;
+using Microsoft.WindowsAzure.Mobile.Service.Security;
 
 namespace baassiService.Controllers
 {
+    [AuthorizeLevel(AuthorizationLevel.User)]
     public class TodoItemController : TableController<TodoItem>
     {
         protected override void Initialize(HttpControllerContext controllerContext)

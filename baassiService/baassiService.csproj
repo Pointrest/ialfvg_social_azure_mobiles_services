@@ -59,7 +59,7 @@
     </VisualStudio>
   </ProjectExtensions>
   <ItemGroup>
-      <Reference Include="Microsoft.Owin.Host.SystemWeb">
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
       <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.WindowsAzure.Mobile.Service">
@@ -67,6 +67,9 @@
     </Reference>
     <Reference Include="Microsoft.WindowsAzure.Mobile.Service.Entity">
       <HintPath>..\packages\WindowsAzure.MobileServices.Backend.Entity.1.0.450\lib\net45\Microsoft.WindowsAzure.Mobile.Service.Entity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAzure.Mobile.Service.Security">
+      <HintPath>..\packages\WindowsAzure.MobileServices.Backend.Security.1.0.450\lib\net45\Microsoft.WindowsAzure.Mobile.Service.Security.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.WindowsAzure.Mobile.Service.Tables">
       <HintPath>..\packages\WindowsAzure.MobileServices.Backend.Tables.1.0.450\lib\net45\Microsoft.WindowsAzure.Mobile.Service.Tables.dll</HintPath>
@@ -185,7 +188,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\TodoItemController.cs" />
+    <Compile Include="DataObjects\Post.cs" />
     <Compile Include="DataObjects\TodoItem.cs" />
     <Compile Include="Models\baassiContext.cs" />
     <Compile Include="ScheduledJobs\SampleJob.cs" />
@@ -206,6 +211,9 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\mobile-baassi.pubxml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
