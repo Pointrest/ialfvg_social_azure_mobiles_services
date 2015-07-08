@@ -12,5 +12,6 @@ namespace baassiService.DataObjects
         public string Id { get; set; }
         public string Name { get; set; }
         public List<User> Followers { get; set; }
+        public List<User> Following { get; set; }
     }
 }

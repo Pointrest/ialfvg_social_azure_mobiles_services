@@ -25,8 +25,6 @@ namespace baassiService.Models
         {
         } 
 
-        public DbSet<Post> Posts { get; set; }
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             string schema = ServiceSettingsDictionary.GetSchemaName();
@@ -41,7 +39,6 @@ namespace baassiService.Models
         }
 
         public System.Data.Entity.DbSet<baassiService.DataObjects.Post> Posts { get; set; }
-
         public System.Data.Entity.DbSet<baassiService.DataObjects.User> Users { get; set; }
     }
 }
