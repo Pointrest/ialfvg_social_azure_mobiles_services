@@ -25,7 +25,7 @@ namespace baassiService.Models
         {
         } 
 
-        //public DbSet<TodoItem> TodoItems { get; set; }
+        public DbSet<Post> Posts { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -39,8 +39,5 @@ namespace baassiService.Models
                 new AttributeToColumnAnnotationConvention<TableColumnAttribute, string>(
                     "ServiceTableColumn", (property, attributes) => attributes.Single().ColumnType.ToString()));
         }
-
-        public System.Data.Entity.DbSet<baassiService.DataObjects.Post> Posts { get; set; }
     }
-
 }
