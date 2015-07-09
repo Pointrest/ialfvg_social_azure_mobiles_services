@@ -6,15 +6,17 @@ using System.Web.Http.OData;
 using Microsoft.WindowsAzure.Mobile.Service;
 using baassiService.DataObjects;
 using baassiService.Models;
+using System;
 
 namespace baassiService.Controllers
 {
     public class UserController : TableController<User>
     {
+        private baassiContext context = null;
         protected override void Initialize(HttpControllerContext controllerContext)
         {
             base.Initialize(controllerContext);
-            baassiContext context = new baassiContext();
+            context = new baassiContext();
             DomainManager = new EntityDomainManager<User>(context, Request, Services);
         }
 
@@ -31,9 +33,14 @@ namespace baassiService.Controllers
         }
 
         // PATCH tables/User/48D68C86-6EA6-4C25-AA33-223FC9A27959
-        public Task<User> PatchUser(string id, Delta<User> patch)
+        public Task<IHttpActionResult> PatchUser(string id, Delta<User> patch)
         {
-             return UpdateAsync(id, patch);
+            string updateCommand = "INSERT INTO UserRelations (Followers, Following)  VALUES = ('" +
+                patch.GetEntity().Followers +"','" + patch.GetEntity().Following + "');";
+
+            string command = String.Format(updateCommand, ServiceSettingsDictionary.GetSchemaName());
+            context.Database.ExecuteSqlCommandAsync(command);
+            return null ;
         }
 
         // POST tables/User

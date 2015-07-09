@@ -13,5 +13,11 @@ namespace baassiService.DataObjects
         public string Name { get; set; }
         public List<User> Followers { get; set; }
         public List<User> Following { get; set; }
+
+        public User()
+        {
+            this.Followers = new List<User>();
+            this.Following = new List<User>();
+        }
     }
 }

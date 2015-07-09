@@ -57,18 +57,14 @@ namespace baassiService.Controllers
             // Get the logged in user
             var currentUser = User as ServiceUser;
             var userID = currentUser.Id;
-
-            var userController = new UserController();
-            var user = userController.GetUser(userID);
-
-            Post current = null;
          
             item.UserId = currentUser.Id;
 
-            current = await InsertAsync(item);
-         
-
             await sendPushNotification(item, currentUser);
+
+            Post current = await InsertAsync(item);         
+
+          
             return CreatedAtRoute("Tables", new { id = current.Id }, current);
         }
 
