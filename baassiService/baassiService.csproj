@@ -214,6 +214,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\PublishProfiles\baassi - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\baassi - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\mobile-baassi.pubxml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

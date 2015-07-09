@@ -25,10 +25,12 @@ namespace baassiService.Controllers
         // GET tables/Post
         public IQueryable<Post> GetAllPost()
         {
+            List<Post> posts = Query().ToList();
             return Query(); 
         }
 
         // GET tables/Post
+        [Route("table/post/user")]
         public IQueryable<Post> GetAllUserPost()
         {
             // Get the logged in user
@@ -60,12 +62,11 @@ namespace baassiService.Controllers
             var user = userController.GetUser(userID);
 
             Post current = null;
-            if (user != null)
-            {
-                item.UserId = currentUser.Id;
+         
+            item.UserId = currentUser.Id;
 
-                current = await InsertAsync(item);
-            }
+            current = await InsertAsync(item);
+         
 
             await sendPushNotification(item, currentUser);
             return CreatedAtRoute("Tables", new { id = current.Id }, current);
